@@ -15,8 +15,10 @@ const CardDisplay = () => {
 
     const userToEdit = useRef();
 
+    // function to get users list from db 
     const getUserList = async () => {
         try {
+            //sending get request to server
             const { data } = await axios.get('http://127.0.0.1:8000/api/v1/user/get');
             console.log(data)
             setUserList(data.users);
@@ -27,8 +29,9 @@ const CardDisplay = () => {
     }
 
     useEffect(() => {
-        getUserList()
+        getUserList() // call function in useeffect
     }, [show, showEditModal])
+    // used show, showEditModal in dependency array as when they change useeffect will run again so new data will be updated to ui 
 
     return (
         <div className='relative h-[100vh] w-[100vw] overflow-y-scroll bg-[#171721] text-[#b7b6b6] pb-10'>

@@ -4,9 +4,10 @@ import toast from 'react-hot-toast';
 
 const UserCard = ({user, userToEdit, setUserList, userList, setShowEditModal}) => {
 
-
+    // handles click button click 
     const handleDelete = async(userId)=>{
       try{
+        // sending delete request to server 
         const {data} =  await axios.delete(`http://127.0.0.1:8000/api/v1/user/delete/${userId}`);
 
         if(data.success){
@@ -21,12 +22,14 @@ const UserCard = ({user, userToEdit, setUserList, userList, setShowEditModal}) =
       }
     }
 
+    // handling click on edit button 
     const handleEdit = ()=>{
         setShowEditModal(true)
         userToEdit.current = user;
     }
 
 
+    // function to make name string's first letter to capital 
     const capitalizeFirstWord = (str)=>{
         return str.split(' ').map(word=>{
             return word.charAt(0).toUpperCase()+word.slice(1)
