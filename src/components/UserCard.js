@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const UserCard = () => {
+const UserCard = ({user}) => {
 
     const [show, setShow] = useState(false);
 
@@ -10,7 +10,7 @@ const UserCard = () => {
 
     <div>
     <span className='font-semibold'> Name:</span>
-    <span className='text-[#8D8B95]'> Avishkar</span>
+    <span className='text-[#8D8B95]'> {user.name}</span>
     </div>
 
 

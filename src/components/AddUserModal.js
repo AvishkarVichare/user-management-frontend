@@ -1,10 +1,17 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
 const AddUserModal = ({show, setShow}) => {
     const [name, setName] = useState("");
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
+      try{
         e.preventDefault();
+        const {data} = await axios.post('http://127.0.0.1:8000/api/v1/user/create',name);
+        console.log(data)
+      }catch(err){
+        console.log(err)
+      }
     }
 
   return (
