@@ -32,7 +32,7 @@ const CardDisplay = () => {
             </button>
 
         {
-            show && <AddUserModal/>
+            show && <AddUserModal setShow={setShow}/>
         }
         </div>
     )
