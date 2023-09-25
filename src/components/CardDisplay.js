@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import UserCard from './UserCard'
 import Add from '../assets/add.png'
 import AddUserModal from './AddUserModal';
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import EditUserModal from './EditUserModal';
 
 const CardDisplay = () => {
 
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false); //for create user modal
+    const [showEditModal, setShowEditModal] = useState(false); //for edit user modal
     const [userList, setUserList] = useState([]);
+
+    const userToEdit = useRef();
 
     const getUserList = async () => {
       try{
@@ -17,12 +22,13 @@ const CardDisplay = () => {
         setUserList(data.users);
       }catch(err){
         console.log(err)
+        toast.error("Something went wrong with server")
       }
     }
 
     useEffect(() => {
         getUserList()
-    }, [])
+    }, [show])
 
     return (
         <div className='relative h-[100vh] w-[100vw] overflow-y-scroll bg-[#171721] text-[#b7b6b6] pb-10'>
@@ -36,7 +42,7 @@ const CardDisplay = () => {
                 </div>
                 {/* //displaying data */}
                 {
-                    userList.map(user => <UserCard key={user._id} user={user}/>)
+                    userList.map(user => <UserCard key={user._id} user={user} userToEdit={userToEdit} userList={userList} setShowEditModal={setShowEditModal} setUserList={setUserList}/>)
                 }
 
             </div>
@@ -47,6 +53,9 @@ const CardDisplay = () => {
 
             {
                 show && <AddUserModal setShow={setShow} />
+            }
+            {
+                showEditModal && <EditUserModal userToEdit={userToEdit} setShowEditModal={setShowEditModal}/>
             }
         </div>
     )
