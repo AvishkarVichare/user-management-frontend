@@ -23,21 +23,28 @@ const UserCard = ({user, userToEdit, setUserList, userList, setShowEditModal}) =
 
     const handleEdit = ()=>{
         setShowEditModal(true)
-        userToEdit.current = user.name;
+        userToEdit.current = user;
+    }
+
+
+    const capitalizeFirstWord = (str)=>{
+        return str.split(' ').map(word=>{
+            return word.charAt(0).toUpperCase()+word.slice(1)
+        }).join(' ');
     }
 
 
   return (
-    <div className=' bg-[#23222d] py-6 px-4 rounded-xl text-[20px] flex justify-between'>
+    <div className=' bg-[#23222d] py-6 px-4 rounded-xl text-[15px] md:text-[18px] lg:text-[20px] flex-col md:flex  justify-between w-[300px] md:w-[500px] lg:w-[700px] '>
 
     <div>
     <span className='font-semibold'> Name:</span>
-    <span className='text-[#8D8B95]'> {user.name}</span>
+    <span className='text-[#8D8B95]'> {capitalizeFirstWord(user.name)}</span>
     </div>
 
 
     {/* button group */}    
-    <div className='mr-[30px] flex gap-4'>
+    <div className='mt-3 md:mt-0 mr-[15px] md:mr-[20px] lg:mr-[30px] flex gap-4'>
         <button onClick={handleEdit} name={user.name} className='text-[#225ee9] font-semibold'>Edit</button>
         <button onClick={()=>handleDelete(user._id)} className='text-[#feaf03] font-semibold'>Delete</button>
     </div>
