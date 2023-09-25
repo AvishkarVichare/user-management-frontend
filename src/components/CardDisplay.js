@@ -19,7 +19,7 @@ const CardDisplay = () => {
     const getUserList = async () => {
         try {
             //sending get request to server
-            const { data } = await axios.get('http://127.0.0.1:8000/api/v1/user/get');
+            const { data } = await axios.get(`${process.env.REACT_APP_API}/get`);
             console.log(data)
             setUserList(data.users);
         } catch (err) {

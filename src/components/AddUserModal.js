@@ -15,7 +15,7 @@ const AddUserModal = ({show, setShow}) => {
         }
 
         // sending post request to our server using enpoints we have created 
-        const {data} = await axios.post('http://127.0.0.1:8000/api/v1/user/create',{name});
+        const {data} = await axios.post(`${process.env.REACT_APP_API}/create`,{name});
         // console.log(data)
         if(data.success){
             toast.success("User Created succesfully");

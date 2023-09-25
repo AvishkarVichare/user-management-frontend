@@ -15,7 +15,7 @@ const EditUserModal = ({setShowEditModal, userToEdit}) => {
         }
 
         // sending post request to our server using enpoints we have created 
-        const {data} = await axios.put(`http://127.0.0.1:8000/api/v1/user/edit/${userToEdit.current._id}`,{name});
+        const {data} = await axios.put(`${process.env.REACT_APP_API}/edit/${userToEdit.current._id}`,{name});
         console.log(data)
         if(data.success){
             toast.success("User updated succesfully");
